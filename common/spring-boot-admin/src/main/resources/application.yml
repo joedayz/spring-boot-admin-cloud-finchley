@@ -1,0 +1,18 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: spring-boot-admin
+  security:
+    user:
+      name: admin
+      password: password
+  boot:
+    admin:
+      discovery:
+        ignored-services: spring-boot-admin
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:password@localhost:8010/eureka/

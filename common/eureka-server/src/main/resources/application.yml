@@ -1,0 +1,28 @@
+server:
+  port: 8010
+
+spring:
+  application:
+    name: eureka-server
+  security:
+    user:
+      name: eureka
+      password: password
+
+# by default every Eureka Server is also an Eureka Client and requires (at least one) service URL to locate a peer.
+eureka:
+  instance:
+    hostname: localhost
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:${server.port}/eureka/
+
+management:
+  endpoints:
+    web.exposure.include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
